@@ -2,9 +2,9 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    sound.loadSound("beat.wav"); //Loads a sound file (in bin/data/)
+    sound.loadSound("spiderman.wav"); //Loads a sound file (in bin/data/)
     sound.setLoop(true); // Makes the song loop indefinitely
-    sound.setVolume(1); // Sets the song volume
+    sound.setVolume(0.5); // Sets the song volume
     ofSetBackgroundColor(38, 184, 237); // Sets the Background Color
 }
 
@@ -14,7 +14,14 @@ void ofApp::update(){
     It's in charge of updating variables and the logic of our app */
     ofSoundUpdate(); // Updates all sound players
     visualizer.updateAmplitudes(); // Updates Amplitudes for visualizer
+    if (sound.getVolume() >= 1){
+                sound.setVolume(1);
+            }     
+    if (sound.getVolume() <= 0){
+                sound.setVolume(0.0);
+            }
 }
+
 
 //--------------------------------------------------------------
 void ofApp::draw(){
@@ -72,9 +79,14 @@ void ofApp::keyPressed(int key){
             }
             playing = !playing;
             break;
+        case '-':
+            sound.setVolume(sound.getVolume() - 0.1);
+            break;
+        case '=':
+            sound.setVolume((sound.getVolume() + 0.1));
+            break;
         case '1':
             mode = '1';
-
             break;
         case '2':
             mode = '2';
