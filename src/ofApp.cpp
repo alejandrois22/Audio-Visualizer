@@ -68,7 +68,13 @@ void ofApp::drawMode3(vector<float> amplitudes){
 }
 
 //--------------------------------------------------------------
+vector<string>canciones
+{"beat.wav","geesebeat.wav","mora.wav","pigeon-coo.wav,rock-song.wav","spiderman.wav"};
+
+
+
 void ofApp::keyPressed(int key){
+
     // This method is called automatically when any key is pressed
     switch(key){
         case 'p':
@@ -94,11 +100,10 @@ void ofApp::keyPressed(int key){
         case '3':
             mode = '3';
             break;
-        case 'A':
-            if (playing){
-                
-            }
-        
+        case 'D':
+            sound.load(canciones[cancion%canciones.size()]);
+            sound.play();
+            cancion ++;
     }
 }
 
