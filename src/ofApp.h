@@ -23,10 +23,17 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+
+
+
 	private:
 		ofSoundPlayer sound;
 		AudioVisualizer visualizer;
-		
+
+		vector<string>canciones
+		{"beat.wav","geesebeat.wav","mora.wav","pigeon-coo.wav,rock-song.wav","spiderman.wav"};
+		int cancion = 0;
+
 		bool playing = false;
 		char mode = '1';
 };
