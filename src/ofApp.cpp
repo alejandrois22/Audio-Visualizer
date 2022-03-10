@@ -28,6 +28,7 @@ void ofApp::draw(){
     /* The update method is called muliple times per second
     It's in charge of drawing all figures and text on screen */
     if(!playing){
+        ofSetColor(256);
         ofDrawBitmapString("Press 'p' to play some music!", ofGetWidth()/2 - 50, ofGetHeight()/2);
     }
     vector<float> amplitudes = visualizer.getAmplitudes();
@@ -44,7 +45,7 @@ void ofApp::drawMode1(vector<float> amplitudes){
         ofFill(); // Drawn Shapes will be filled in with color
         ofSetColor(256); // This resets the color of the "brush" to white
         ofDrawBitmapString("Rectangle Height Visualizer", 0, 5);
-        ofSetColor(189, 45, 135); 
+        ofSetColor(ofRandom(255), ofRandom(255), ofRandom(255)); 
         ofDrawRectangle(2, ofGetHeight() - 100, 50,  amplitudes[0]);
 
         
@@ -64,6 +65,7 @@ void ofApp::drawMode2(vector<float> amplitudes){
 void ofApp::drawMode3(vector<float> amplitudes){
     ofSetColor(256); // This resets the color of the "brush" to white
     ofDrawBitmapString("Rectangle Width Visualizer", 0, 15);
+    ofSetColor(ofRandom(255), ofRandom(255), ofRandom(255));
     // YOUR CODE HERE
 }
 
