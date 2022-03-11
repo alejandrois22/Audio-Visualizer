@@ -33,6 +33,7 @@ class ofApp : public ofBaseApp{
 		vector<string>canciones
 		{"beat.wav","geesebeat.wav","mora.wav","pigeon-coo.wav,rock-song.wav","spiderman.wav"};
 		int cancion = 0;//counter
+		//
 
 		bool playing = false;
 		char mode = '1';
