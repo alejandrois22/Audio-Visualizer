@@ -47,6 +47,12 @@ void ofApp::drawMode1(vector<float> amplitudes){
         ofDrawBitmapString("Rectangle Height Visualizer", 0, 5);
         ofSetColor(ofRandom(255), ofRandom(255), ofRandom(255)); 
         ofDrawRectangle(2, ofGetHeight() - 100, 50,  amplitudes[0]);
+		
+        double width = ofGetWidth()/visualizer.getBands();
+
+        for (int i =0 ; i<visualizer.getBands();i++){
+            ofDrawRectangle(width * i, ofGetHeight()-100,width,amplitudes[i]* 3.14);
+}
 
         
 }
@@ -68,6 +74,11 @@ void ofApp::drawMode3(vector<float> amplitudes){
     ofSetColor(ofRandom(255), ofRandom(255), ofRandom(255));
     // YOUR CODE HERE
 }
+
+
+
+
+
 
 //--------------------------------------------------------------
 vector<string>canciones
@@ -106,6 +117,7 @@ void ofApp::keyPressed(int key){
             sound.load(canciones[cancion%canciones.size()]);
             sound.play();
             cancion ++;
+            break;
     }
 }
 

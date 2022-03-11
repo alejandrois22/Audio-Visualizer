@@ -36,4 +36,5 @@ class ofApp : public ofBaseApp{
 
 		bool playing = false;
 		char mode = '1';
+
 };
