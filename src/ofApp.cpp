@@ -49,7 +49,7 @@ void ofApp::drawMode1(vector<float> amplitudes){
         ofDrawRectangle(2, ofGetHeight() - 100, 50,  amplitudes[0]);
 		
         double width = ofGetWidth()/visualizer.getBands();
-
+//multiplebars
         for (int i =0 ; i<visualizer.getBands();i++){
             ofDrawRectangle(width * i, ofGetHeight()-100,width,amplitudes[i]* 3.14);
 }
