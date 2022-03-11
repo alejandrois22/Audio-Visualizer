@@ -25,6 +25,8 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		void updateVolume();
 
+		void throwNotification(int, int);
+
 
 
 	private:
@@ -36,6 +38,10 @@ class ofApp : public ofBaseApp{
 		int cancion = 0;//counter
 		//
 
+		int counter;
+		bool isRec = false;
+		bool maxOrMin = false;
+		int notification;
 		bool playing = false;
 		bool pause = false;
 		char mode = '1';

@@ -4,7 +4,8 @@
 void ofApp::setup(){
     sound.loadSound("spiderman.wav"); //Loads a sound file (in bin/data/)
     sound.setLoop(true); // Makes the song loop indefinitely
-    sound.setVolume(0.5); // Sets the song volume
+    sound.setVolume(0.5);
+     // Sets the song volume
     ofSetBackgroundColor(38, 184, 237); // Sets the Background Color
 }
 
@@ -33,6 +34,12 @@ void ofApp::draw(){
         drawMode2(amplitudes);
     }else if(mode == '3'){
         drawMode3(amplitudes);
+    }
+    if (isRec){
+        ofSetColor(255, 0, 0);
+        ofFill();
+        ofDrawCircle(ofGetWidth() - 40, 40, 15);
+        ofDrawBitmapString("Recording", 0, 30);
     }
 }
 
@@ -117,6 +124,14 @@ void ofApp::keyPressed(int key){
             sound.load(canciones[cancion%canciones.size()]);
             sound.play();
             cancion ++;
+            break;
+        case 'r':
+            if (!isRec){
+                isRec = true;
+            }
+            else {
+                isRec = false;
+            }
             break;
     }
 }
