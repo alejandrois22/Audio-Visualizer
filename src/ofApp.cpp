@@ -21,7 +21,7 @@ void ofApp::update(){
                 sound.setVolume(0.0);
             }
 }
-
+ 
 
 //--------------------------------------------------------------
 void ofApp::draw(){
@@ -44,7 +44,7 @@ void ofApp::draw(){
 void ofApp::drawMode1(vector<float> amplitudes){
         ofFill(); // Drawn Shapes will be filled in with color
         ofSetColor(256); // This resets the color of the "brush" to white
-        ofDrawBitmapString("Rectangle Height Visualizer", 0, 5);
+        ofDrawBitmapString("Rectangle Height Visualizer", 0, 15);
         ofSetColor(ofRandom(255), ofRandom(255), ofRandom(255)); 
         ofDrawRectangle(2, ofGetHeight() - 100, 50,  amplitudes[0]);
 		
@@ -73,7 +73,12 @@ void ofApp::drawMode3(vector<float> amplitudes){
     ofDrawBitmapString("Rectangle Width Visualizer", 0, 15);
     ofSetColor(ofRandom(255), ofRandom(255), ofRandom(255));
     // YOUR CODE HERE
-}
+    double height = ofGetHeight() / visualizer.getBands();
+    for (int i = 0; i< visualizer.getBands(); i++){
+        ofDrawRectangle(ofGetWidth(),ofGetHeight()* i, amplitudes[i], height);
+        }
+    }
+
 
 
 
