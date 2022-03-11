@@ -23,6 +23,7 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		void updateVolume();
 
 
 
@@ -36,6 +37,7 @@ class ofApp : public ofBaseApp{
 		//
 
 		bool playing = false;
+		bool pause = false;
 		char mode = '1';
 
 };

@@ -14,12 +14,7 @@ void ofApp::update(){
     It's in charge of updating variables and the logic of our app */
     ofSoundUpdate(); // Updates all sound players
     visualizer.updateAmplitudes(); // Updates Amplitudes for visualizer
-    if (sound.getVolume() >= 1){
-                sound.setVolume(1);
-            }     
-    if (sound.getVolume() <= 0){
-                sound.setVolume(0.0);
-            }
+    updateVolume();
 }
  
 
@@ -28,7 +23,7 @@ void ofApp::draw(){
     /* The update method is called muliple times per second
     It's in charge of drawing all figures and text on screen */
     if(!playing){
-        ofSetColor(256);
+        ofSetColor(255);
         ofDrawBitmapString("Press 'p' to play some music!", ofGetWidth()/2 - 50, ofGetHeight()/2);
     }
     vector<float> amplitudes = visualizer.getAmplitudes();
@@ -69,6 +64,7 @@ void ofApp::drawMode2(vector<float> amplitudes){
 }
 
 void ofApp::drawMode3(vector<float> amplitudes){
+    ofFill();
     ofSetColor(256); // This resets the color of the "brush" to white
     ofDrawBitmapString("Rectangle Width Visualizer", 0, 15);
     ofSetColor(ofRandom(255), ofRandom(255), ofRandom(255));
@@ -78,13 +74,6 @@ void ofApp::drawMode3(vector<float> amplitudes){
         ofDrawRectangle(ofGetWidth(),ofGetHeight()* i, amplitudes[i], height);
         }
     }
-
-
-
-
-
-
-
 //--------------------------------------------------------------
 vector<string>canciones
 {"beat.wav","geesebeat.wav","mora.wav","pigeon-coo.wav,rock-song.wav","spiderman.wav"};
@@ -109,6 +98,12 @@ void ofApp::keyPressed(int key){
         case '=':
             sound.setVolume((sound.getVolume() + 0.1));
             break;
+        case 'A':
+            if (pause){
+                pause = true;
+            }
+            else pause = false;
+            break;
         case '1':
             mode = '1';
             break;
@@ -124,6 +119,15 @@ void ofApp::keyPressed(int key){
             cancion ++;
             break;
     }
+}
+
+void ofApp::updateVolume(){
+    if (sound.getVolume() >= 1){
+                sound.setVolume(1);
+            }     
+    if (sound.getVolume() <= 0){
+                sound.setVolume(0.0);
+            }
 }
 
 //--------------------------------------------------------------
