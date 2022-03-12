@@ -106,10 +106,13 @@ void ofApp::keyPressed(int key){
             sound.setVolume((sound.getVolume() + 0.1));
             break;
         case 'A':
-            if (pause){
-                pause = true;
+            playing = !playing;
+            if (playing){
+                sound.setPaused(false);
             }
-            else pause = false;
+            else{
+                sound.setPaused(true);
+            }
             break;
         case '1':
             mode = '1';
