@@ -119,6 +119,15 @@ void ofApp::keyPressed(int key){
                 record('=');
             sound.setVolume((sound.getVolume() + 0.1));
             break;
+        case 'A':
+            playing = !playing;
+            if (playing){
+                sound.setPaused(false);
+            }
+            else{
+                sound.setPaused(true);
+            }
+            break;
         case '1':
             if (isRec)
                 record('1');
