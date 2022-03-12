@@ -9,6 +9,9 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    if (pause){
+    return;
+    }
     /* The update method is called muliple times per second
     It's in charge of updating variables and the logic of our app */
     ofSoundUpdate(); // Updates all sound players
@@ -17,6 +20,7 @@ void ofApp::update(){
     counter ++;
     counterUpdate();
     sound.setLoop(true);
+    
 
 }
  
@@ -80,7 +84,7 @@ void ofApp::drawMode2(vector<float> amplitudes){
 
 void ofApp::drawMode3(vector<float> amplitudes){
     ofFill();
-     // This resets the color of the "brush" to white
+    ofSetColor(256);// This resets the color of the "brush" to white
     ofDrawBitmapString("Rectangle Width Visualizer", 0, 15);
     ofSetColor(ofRandom(255), ofRandom(255), ofRandom(255));
     // YOUR CODE HERE
@@ -92,8 +96,6 @@ void ofApp::drawMode3(vector<float> amplitudes){
 //--------------------------------------------------------------
 vector<string>canciones
 {"beat.wav","geesebeat.wav","mora.wav","pigeon-coo.wav,rock-song.wav","spiderman.wav"};
-
-
 
 void ofApp::keyPressed(int key){
 
@@ -119,14 +121,14 @@ void ofApp::keyPressed(int key){
                 record('=');
             sound.setVolume((sound.getVolume() + 0.1));
             break;
-        case 'A':
-            playing = !playing;
-            if (playing){
-                sound.setPaused(false);
-            }
-            else{
-                sound.setPaused(true);
-            }
+        case 'a':
+            if (isRec){
+                record('a');
+        }
+            if (!pause){
+                pause = true;
+                }
+                else pause = false;
             break;
         case '1':
             if (isRec)
@@ -143,9 +145,9 @@ void ofApp::keyPressed(int key){
                 record('3');
             mode = '3';
             break;
-        case 'D':
+        case 'd':
             if (isRec)
-                record('D');
+                record('d');
             sound.load(canciones[cancion%canciones.size()]);
             sound.play();
             cancion ++;
@@ -161,8 +163,6 @@ void ofApp::keyPressed(int key){
                 isRec = false;
             }
             break;
-        
-
         case 't':
             if (isRec)
                 record('t');
@@ -170,7 +170,7 @@ void ofApp::keyPressed(int key){
             isRep = true;
             break;
 
-        case 'C':
+        case 'c':
             if (!isRep){
                 isRep  = true;
             }
@@ -250,6 +250,7 @@ char ofApp::validCheck(char key){
     }
     else return key;
 }
+
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 

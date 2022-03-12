@@ -30,6 +30,7 @@ class ofApp : public ofBaseApp{
 		void throwNotification(int, int);
 		void record(char);
 		char validCheck(char);
+		
 
 
 	private:
@@ -54,5 +55,6 @@ class ofApp : public ofBaseApp{
 		bool playing = false;
 		bool pause = false;
 		bool cancel = false;
+	
 
 };
