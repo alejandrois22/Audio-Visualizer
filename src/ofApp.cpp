@@ -80,13 +80,13 @@ void ofApp::drawMode2(vector<float> amplitudes){
 
 void ofApp::drawMode3(vector<float> amplitudes){
     ofFill();
-    ofSetColor(256); // This resets the color of the "brush" to white
+     // This resets the color of the "brush" to white
     ofDrawBitmapString("Rectangle Width Visualizer", 0, 15);
     ofSetColor(ofRandom(255), ofRandom(255), ofRandom(255));
     // YOUR CODE HERE
     double height = ofGetHeight() / visualizer.getBands();
     for (int i = 0; i< visualizer.getBands(); i++){
-        ofDrawRectangle(ofGetWidth(),ofGetHeight()* i, amplitudes[i], height);
+        ofDrawRectangle(ofGetWidth(),height* i, amplitudes[i], height);
         }
     }
 //--------------------------------------------------------------
@@ -161,12 +161,22 @@ void ofApp::keyPressed(int key){
                 isRec = false;
             }
             break;
+        
+
         case 't':
             if (isRec)
                 record('t');
             isRec = false;
             isRep = true;
             break;
+
+        case 'C':
+            if (!isRep){
+                isRep  = true;
+            }
+            else{
+                isRep = false;
+            }
     }
 }
 
