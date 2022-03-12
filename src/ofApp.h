@@ -24,9 +24,12 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		void updateVolume();
-
+		void counterUpdate();
+		void replay();
+		void endRep();
 		void throwNotification(int, int);
-
+		void record(char);
+		char validCheck(char);
 
 
 	private:
@@ -38,12 +41,18 @@ class ofApp : public ofBaseApp{
 		int cancion = 0;//counter
 		//
 
+		char mode = '1';
+		vector<char> keyRec;
 		int counter;
+		bool keyCheck = false;
+		unsigned int nextKey = 0;
+		bool isRep = false;
+		unsigned int repObject = 0;
+		bool lastObject = false;
 		bool isRec = false;
-		bool maxOrMin = false;
 		int notification;
 		bool playing = false;
 		bool pause = false;
-		char mode = '1';
+		bool cancel = false;
 
 };

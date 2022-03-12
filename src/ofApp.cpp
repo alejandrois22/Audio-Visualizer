@@ -16,6 +16,9 @@ void ofApp::update(){
     ofSoundUpdate(); // Updates all sound players
     visualizer.updateAmplitudes(); // Updates Amplitudes for visualizer
     updateVolume();
+    counter ++;
+    counterUpdate();
+
 }
  
 
@@ -40,6 +43,12 @@ void ofApp::draw(){
         ofFill();
         ofDrawCircle(ofGetWidth() - 40, 40, 15);
         ofDrawBitmapString("Recording", 0, 30);
+    }
+    if (isRep){
+        ofSetColor(0, 0, 0);
+        ofFill();
+        ofDrawRectangle(ofGetWidth() - 55, 25, 40, 40);
+        ofDrawBitmapString("Replaying", 0, 30);
     }
 }
 
@@ -92,6 +101,8 @@ void ofApp::keyPressed(int key){
     // This method is called automatically when any key is pressed
     switch(key){
         case 'p':
+            if (isRec)
+                record('p');
             if(playing){
                 sound.stop();
             }else{
@@ -100,39 +111,61 @@ void ofApp::keyPressed(int key){
             playing = !playing;
             break;
         case '-':
+            if (isRec)
+                record('-');
             sound.setVolume(sound.getVolume() - 0.1);
             break;
         case '=':
+        if (isRec)
+                record('=');
             sound.setVolume((sound.getVolume() + 0.1));
             break;
-        case 'A':
-            if (pause){
-                pause = true;
-            }
-            else pause = false;
-            break;
         case '1':
+            if (isRec)
+                record('1');
             mode = '1';
             break;
         case '2':
+            if (isRec)
+                record('2');
             mode = '2';
             break;
         case '3':
+            if (isRec)
+                record('3');
             mode = '3';
             break;
         case 'D':
+            if (isRec)
+                record('D');
             sound.load(canciones[cancion%canciones.size()]);
             sound.play();
             cancion ++;
             break;
         case 'r':
+            if (isRec)
+                record('r');
             if (!isRec){
                 isRec = true;
+                keyRec.clear();
             }
             else {
                 isRec = false;
             }
             break;
+        case 't':
+            if (isRec)
+                record('t');
+            isRec = false;
+            isRep = true;
+            break;
+        case 'C':
+            if (!isRep){
+                isRep   = true;
+            }
+            else{
+                isRep = false;
+            }
     }
 }
 
@@ -145,6 +178,67 @@ void ofApp::updateVolume(){
             }
 }
 
+void ofApp::counterUpdate(){
+    if (counter == 1200)
+        counter = 0;
+    if (isRep){
+        replay();
+    }
+    if (pause)  
+        return;
+}
+
+void ofApp::record(char key){
+    keyRec.push_back(key);
+}
+
+void ofApp::replay(){
+    if (counter % 120 == 0){
+        keyPressed(keyRec.at(repObject));
+        if (repObject == keyRec.size() && !lastObject){
+            keyRec.push_back(' ');
+            lastObject = true;
+        }
+    }
+    if (repObject == keyRec.size()){
+        endRep();
+    }
+}
+
+void ofApp::endRep(){
+    isRep = false;
+    keyRec.clear();
+    repObject = 0;
+    nextKey = 0;
+    keyCheck = false;
+    lastObject = false;
+}
+
+char ofApp::validCheck(char key){
+    if (pause){
+        if (key == 'a'){
+            return key;
+        }
+        else return ' ';
+    }
+    if (isRep && key == keyRec.at(repObject)){
+        if (repObject > nextKey){
+            keyCheck = false;
+        }
+        if (!keyCheck){
+            keyCheck = true;
+            nextKey = repObject;
+            return keyRec.at(repObject);
+        }
+    }
+    if (isRep){
+        if (key == 't'){
+            endRep();
+        }
+        return ' ';
+    }
+    else return key;
+}
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 
