@@ -3,9 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     sound.loadSound("spiderman.wav"); //Loads a sound file (in bin/data/)
-    sound.setLoop(true); // Makes the song loop indefinitely
-    sound.setVolume(0.5);
-     // Sets the song volume
+    sound.setVolume(0.5); // Sets the song volume
     ofSetBackgroundColor(38, 184, 237); // Sets the Background Color
 }
 
@@ -18,6 +16,7 @@ void ofApp::update(){
     updateVolume();
     counter ++;
     counterUpdate();
+    sound.setLoop(true);
 
 }
  
@@ -159,13 +158,6 @@ void ofApp::keyPressed(int key){
             isRec = false;
             isRep = true;
             break;
-        case 'C':
-            if (!isRep){
-                isRep   = true;
-            }
-            else{
-                isRep = false;
-            }
     }
 }
 
